@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"log"
 	"os"
 )
 
@@ -60,7 +61,7 @@ func main() {
 	file := os.Args[1]
 	readFile, err := os.Open(file)
 	if err != nil {
-		fmt.Println(err)
+		log.Fatalln(err)
 	}
 	defer readFile.Close()
 
