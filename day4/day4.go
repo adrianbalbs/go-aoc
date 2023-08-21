@@ -32,15 +32,27 @@ func isContained(start1, end1, start2, end2 int) int {
 	return 0
 }
 
-func part1(input []string) int {
-	totalContained := 0
+// We want to make sure the intervals are contained or overlap
+func isOverlapping(start1, end1, start2, end2 int) int {
+	if (start1 >= start2 && end1 <= end2) || (start2 >= start1 && end2 <= end1) {
+		return 1
+	} else if (start1 <= end2 && start1 >= start2) || (end1 >= start2 && end1 <= end2) {
+		return 1
+	}
+	return 0
+}
+
+func part1And2(input []string) (totalContained, totalOverlapping int) {
+	totalContained = 0
+	totalOverlapping = 0
 	for _, str := range input {
 		if str != "" {
 			start1, end1, start2, end2 := part1Helper(str)
 			totalContained += isContained(start1, end1, start2, end2)
+			totalOverlapping += isOverlapping(start1, end1, start2, end2)
 		}
 	}
-	return totalContained
+	return
 }
 
 func main() {
@@ -50,5 +62,7 @@ func main() {
 		return
 	}
 	input := strings.Split(string(readFile), "\n")
-	fmt.Println("Part 1:", part1(input))
+	part1, part2 := part1And2(input)
+	fmt.Println("Part 1:", part1)
+	fmt.Println("Part 2:", part2)
 }
