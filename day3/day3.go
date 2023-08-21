@@ -67,7 +67,7 @@ func main() {
 	if err != nil {
 		log.Fatalln(err)
 	}
-
+	fmt.Println(string(readFile))
 	input := strings.Split(string(readFile), "\n")
 	fmt.Println("Part 1:", part1(input))
 	fmt.Println("Part 2:", part2(input))
